@@ -16,16 +16,16 @@ export const requestSampleConfigs = {
             Axios: 'axios',
         },
     },
-    Node: {
-        snippet: 'node',
-        libraries: {
-            Native: 'native',
-            Request: 'request',
-            Unirest: 'unirest',
-            Fetch: 'fetch',
-            Axios: 'axios',
-        },
-    },
+    // Node: {
+    //     snippet: 'node',
+    //     libraries: {
+    //         Native: 'native',
+    //         Request: 'request',
+    //         Unirest: 'unirest',
+    //         Fetch: 'fetch',
+    //         Axios: 'axios',
+    //     },
+    // },
     Python: {
         snippet: 'python',
         libraries: {
