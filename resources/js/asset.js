@@ -1,9 +1,5 @@
-import CodeViewerComponent from './CodeViewerComponent';
-import CodeBlockComponent from './CodeBlockComponent';
-import SnippetsSelectorComponent from './SnippetsSelectorComponent';
+import CodeSimples from './CodeSimples';
 
 LaRecipe.booting((Vue) => {
-    Vue.component(CodeViewerComponent.name, CodeViewerComponent);
-    Vue.component(CodeBlockComponent.name, CodeBlockComponent);
-    Vue.component(SnippetsSelectorComponent.name, SnippetsSelectorComponent);
+    Vue.component(CodeSimples.name, CodeSimples);
 })

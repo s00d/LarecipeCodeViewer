@@ -14,8 +14,8 @@ class AssetServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        LaRecipe::script('code-viewer', __DIR__.'/../dist/js/asset.js');
-        LaRecipe::style('code-viewer', __DIR__.'/../dist/css/asset.css');
+        LaRecipe::script('larecipe-code-viewer', __DIR__.'/../dist/js/asset.js');
+        LaRecipe::style('larecipe-code-viewer', __DIR__.'/../dist/css/asset.css');
     }
 
     /**
