@@ -39,7 +39,7 @@ export default {
       required: false,
       default: 'GET'
     },
-    params: {
+    parameters: {
       type: Object,
       required: false,
       default: function () {
@@ -209,28 +209,32 @@ export default {
       const method = this.method.toUpperCase();
       let baseUrl = this.baseUrl;
       if (!baseUrl || baseUrl === '') {
-        baseUrl = location.href
+        baseUrl = location.protocol + '://' + location.host;
       }
-      let url = baseUrl + this.url;
+      if (baseUrl.endsWith('/')) {
+        baseUrl = baseUrl.slice(0, -1)
+      }
+      let fxurl = this.url;
+      if (!fxurl.startsWith('/')) {
+        fxurl = fxurl.substring(1)
+      }
+      let url = baseUrl + fxurl;
       for (const i in this.parameters) {
         const {name} = this.parameters[i];
-        const value = this.parameters[i].schema.default ?? '';
-        if (!value) {
-          continue;
-        }
+        const value = this.parameters[i].default ?? '';
         if (this.parameters[i].in === 'cookie') {
           cookies.push({name, value});
         }
         if (this.parameters[i].in === 'header') {
           headers.push({name, value});
         }
-        if (this.parameters[i].in === 'query' && this.parameters[i].required) {
+        if (this.parameters[i].in === 'query') {
           queryString.push({name, value});
         }
-        if (this.parameters[i].in === 'path' && this.parameters[i].required) {
+        if (this.parameters[i].in === 'path') {
           url = url.replaceAll(`{${name}}`, value);
         }
-        if (this.parameters[i].in === 'body' && this.parameters[i].required) {
+        if (this.parameters[i].in === 'body') {
           postData.push({name, value});
         }
       }
@@ -316,6 +320,7 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  border: 0;
 }
 
 /* Code blocks */
