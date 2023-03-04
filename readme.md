@@ -1,5 +1,5 @@
 <h6 align="center">
-    <img src="https://larecipe.saleem.dev/images/logo.svg"/>
+    <img src="https://raw.githubusercontent.com/s00d/LarecipeCodeViewer/main/resourses/Screenshot.png"/>
 </h6>
 
 <h2 align="center">
