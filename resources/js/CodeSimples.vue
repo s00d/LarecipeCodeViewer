@@ -300,7 +300,7 @@ pre[class*="language-"] {
   background: none;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: 0.7em;
+  font-size: 0.9em;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -433,7 +433,7 @@ pre[class*="language-"] {
   background-color: #e0e6f0;
   border-color: #e0e6f0;
   color: #66676b;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   padding-left: 16px;
   padding-right: 12px;
