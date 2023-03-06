@@ -39,13 +39,139 @@ export default {
       required: false,
       default: 'GET'
     },
-    parameters: {
-      type: Object,
+    cookies: {
+      type: Array,
+      required: false,
+      default: []
+    },
+    headers: {
+      type: Array,
+      required: false,
+      default: []
+    },
+    query: {
+      type: Array,
+      required: false,
+      default: []
+    },
+    path: {
+      type: Array,
+      required: false,
+      default: []
+    },
+    postData: {
+      type: Array,
+      required: false,
+      default: []
+    },
+    mimeType: {
+      type: String,
+      required: false,
+      default: 'application/x-www-form-urlencoded'
+    },
+    configs: {
+      type: Array,
       required: false,
       default: function () {
-        return {};
+        return [
+          {
+            snippet: 'shell',
+            libraries: {
+              cURL: 'curl',
+              HTTPie: 'httpie',
+              Wget: 'wget',
+            },
+          },
+          {
+            snippet: 'javascript',
+            libraries: {
+              Fetch: 'fetch',
+              XMLHttpRequest: 'xmlhttprequest',
+              jQuery: 'jquery',
+              Axios: 'axios',
+            },
+          },
+          // {
+          //   snippet: 'node',
+          //   libraries: {
+          //     Native: 'native',
+          //     Request: 'request',
+          //     Unirest: 'unirest',
+          //     Fetch: 'fetch',
+          //     Axios: 'axios',
+          //   },
+          // },
+          {
+            snippet: 'python',
+            libraries: {
+              'Python 3': 'python3',
+              Requests: 'requests',
+            },
+          },
+          {
+            snippet: 'go',
+          },
+          {
+            snippet: 'c',
+          },
+          // 'Objective-C': {
+          //     snippet: 'objectivec',
+          // },
+          {
+            snippet: 'ocaml',
+          },
+          {
+            snippet: 'csharp',
+            libraries: {
+              HttpClient: 'httpclient',
+              RestSharp: 'restsharp',
+            },
+          },
+          {
+            snippet: 'java',
+            libraries: {
+              AsyncHttp: 'asynchttp',
+              NetHttp: 'nethttp',
+              OkHttp: 'okhttp',
+              Unirest: 'unirest',
+            },
+          },
+          {
+            snippet: 'http',
+          },
+          {
+            snippet: 'clojure',
+          },
+          {
+            snippet: 'kotlin',
+          },
+          {
+            snippet: 'php',
+            libraries: {
+              'pecl/http 1': 'http1',
+              'pecl/http 2': 'http2',
+              cURL: 'curl',
+            },
+          },
+          {
+            snippet: 'powershell',
+            libraries: {
+              WebRequest: 'webrequest',
+              RestMethod: 'restmethod',
+            },
+          },
+          {
+            snippet: 'r',
+          },
+          {
+            snippet: 'ruby',
+          },
+          {
+            snippet: 'swift',
+          },
+        ];
       }
-    },
+    }
   },
 
   data() {
@@ -55,121 +181,20 @@ export default {
       showPopup: false,
       onPopupIndex: null,
       vals: [],
-      configs: [
-        {
-          snippet: 'shell',
-          libraries: {
-            cURL: 'curl',
-            HTTPie: 'httpie',
-            Wget: 'wget',
-          },
-        },
-        {
-          snippet: 'javascript',
-          libraries: {
-            Fetch: 'fetch',
-            XMLHttpRequest: 'xmlhttprequest',
-            jQuery: 'jquery',
-            Axios: 'axios',
-          },
-        },
-        // {
-        //   snippet: 'node',
-        //   libraries: {
-        //     Native: 'native',
-        //     Request: 'request',
-        //     Unirest: 'unirest',
-        //     Fetch: 'fetch',
-        //     Axios: 'axios',
-        //   },
-        // },
-        {
-          snippet: 'python',
-          libraries: {
-            'Python 3': 'python3',
-            Requests: 'requests',
-          },
-        },
-        {
-          snippet: 'go',
-        },
-        {
-          snippet: 'c',
-        },
-        // 'Objective-C': {
-        //     snippet: 'objectivec',
-        // },
-        {
-          snippet: 'ocaml',
-        },
-        {
-          snippet: 'csharp',
-          libraries: {
-            HttpClient: 'httpclient',
-            RestSharp: 'restsharp',
-          },
-        },
-        {
-          snippet: 'java',
-          libraries: {
-            AsyncHttp: 'asynchttp',
-            NetHttp: 'nethttp',
-            OkHttp: 'okhttp',
-            Unirest: 'unirest',
-          },
-        },
-        {
-          snippet: 'http',
-        },
-        {
-          snippet: 'clojure',
-        },
-        {
-          snippet: 'kotlin',
-        },
-        {
-          snippet: 'php',
-          libraries: {
-            'pecl/http 1': 'http1',
-            'pecl/http 2': 'http2',
-            cURL: 'curl',
-          },
-        },
-        {
-          snippet: 'powershell',
-          libraries: {
-            WebRequest: 'webrequest',
-            RestMethod: 'restmethod',
-          },
-        },
-        {
-          snippet: 'r',
-        },
-        {
-          snippet: 'ruby',
-        },
-        {
-          snippet: 'swift',
-        },
-      ],
+
     }
   },
 
   watch: {},
 
   methods: {
-    requestUpdate() {
-
-    },
     onOpenPopupClick() {
       this.showPopup = !this.showPopup;
-      this.requestUpdate();
     },
     onLangHover(index) {
       const select = this.configs[index];
       if (!select || !select.libraries) return;
       this.onPopupIndex = parseInt(index, 10);
-      this.requestUpdate();
     },
     onLangClick(index) {
       const select = this.configs[index];
@@ -177,7 +202,6 @@ export default {
       this.lang = select.snippet;
       this.showPopup = false;
       this.onPopupIndex = null;
-      this.requestUpdate();
     },
     onClientClick(index, client) {
       const select = this.configs[index];
@@ -186,10 +210,37 @@ export default {
       this.client = client;
       this.showPopup = false;
       this.onPopupIndex = null;
-      this.requestUpdate();
     },
     copyToClipboard(e) {
       copyToClipboard(this.genCode, e)
+    },
+    getParam(name) {
+      const winName = 'codeSimples' + name[0].toUpperCase() + name.slice(1)
+      const result = [];
+      let val = [];
+      if (!window || !window[winName]) {
+        val = this[name];
+      } else {
+        val = [...this[name], ...(window[winName] ?? [])];
+      }
+
+      if (!Array.isArray(val)) {
+        return [];
+      }
+
+      for (let i in val) {
+        if (
+            typeof val[i] === 'object' &&
+            !Array.isArray(val[i]) &&
+            val[i] !== null &&
+            val[i].name !== null &&
+            val[i].value !== null
+        ) {
+          result.push(val[i]);
+        }
+      }
+
+      return result;
     },
   },
 
@@ -201,64 +252,35 @@ export default {
       }
       return this.genCode;
     },
+
     genCode() {
-      const headers = [];
-      const queryString = [];
-      const postData = [];
-      const cookies = [];
       const method = this.method.toUpperCase();
-      let baseUrl = this.baseUrl;
-      if (!baseUrl || baseUrl === '') {
-        baseUrl = location.protocol + '://' + location.host;
-      }
-      if (baseUrl.endsWith('/')) {
-        baseUrl = baseUrl.slice(0, -1)
-      }
-      let fxurl = this.url;
-      if (!fxurl.startsWith('/')) {
-        fxurl = fxurl.substring(1)
-      }
+      const baseUrl = this.baseUrl || `${location.protocol}//${location.host}`;
+      const fxurl = this.url.startsWith('/') ? this.url.substring(1) : this.url;
       let url = baseUrl + fxurl;
-      for (const i in this.parameters) {
-        const {name} = this.parameters[i];
-        const value = this.parameters[i].default ?? '';
-        if (this.parameters[i].in === 'cookie') {
-          cookies.push({name, value});
-        }
-        if (this.parameters[i].in === 'header') {
-          headers.push({name, value});
-        }
-        if (this.parameters[i].in === 'query') {
-          queryString.push({name, value});
-        }
-        if (this.parameters[i].in === 'path') {
-          url = url.replaceAll(`{${name}}`, value);
-        }
-        if (this.parameters[i].in === 'body') {
-          postData.push({name, value});
-        }
+
+      for (const [name, value] of Object.entries(this.getParam('path'))) {
+        url = url.replaceAll(`{${name}}`, value);
       }
 
       const param = {
         method,
         url,
-        headers,
-        queryString,
-        cookies,
+        headers: this.getParam('headers'),
+        queryString: this.getParam('query'),
+        cookies: this.getParam('cookies'),
       };
-      if (method === 'POST' && postData.length > 0) {
-        param.postData = {mimeType: this.mimeType, params: JSON.parse(JSON.stringify(postData))};
+
+      if (method === 'POST' && this.getParam('postData').length > 0) {
+        param.postData = { mimeType: this.mimeType, params: this.getParam('postData') };
       }
 
-      console.log(param);
+      console.log(22222, param);
 
       const snippet = new HTTPSnippet(param);
       return snippet.convert(this.lang, this.client) || '';
     }
   },
-  mounted() {
-    console.log(1111)
-  }
 }
 </script>
 
@@ -297,7 +319,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 code[class*="language-"],
 pre[class*="language-"] {
   color: #f8f8f2;
