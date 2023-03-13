@@ -255,7 +255,7 @@ export default {
 
     genCode() {
       const method = this.method.toUpperCase();
-      const baseUrl = this.baseUrl || `${location.protocol}//${location.host}`;
+      const baseUrl = this.baseUrl || `${location.protocol}//${location.host}/`;
       const fxurl = this.url.startsWith('/') ? this.url.substring(1) : this.url;
       let url = baseUrl + fxurl;
 
