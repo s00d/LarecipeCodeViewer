@@ -319,7 +319,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 code[class*="language-"],
 pre[class*="language-"] {
   color: #f8f8f2;
